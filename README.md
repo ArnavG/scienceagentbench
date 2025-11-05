@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/g_FKUsS6)
 # A4 — ScienceAgentBench
 
 [ScienceAgentBench](https://arxiv.org/abs/2410.05080) is a recent attempt to create a benchmark to evaluate the capabilities of scientific assistants. We will use this benchmark to experiment with designing and evaluating multi-agent systems.
