@@ -1,0 +1,9 @@
+task,metric_name,class_label,value
+CT_TOX,accuracy,overall,0.9261744966442953
+CT_TOX,precision,0,0.9251700680272109
+CT_TOX,precision,1,1.0
+CT_TOX,recall,0,1.0
+CT_TOX,recall,1,0.15384615384615385
+CT_TOX,f1,0,0.9611307420494699
+CT_TOX,f1,1,0.26666666666666666
+CT_TOX,roc_auc,overall,0.7484445701357465

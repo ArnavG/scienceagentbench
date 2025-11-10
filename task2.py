@@ -134,7 +134,7 @@ def main():
         print(f"\n--- LLM STEP {step + 1} ---\n")
         ai_msg = llm_with_tools.invoke(messages)
 
-        # Sanitize tool_calls so that args are JSON-serializable (no run_manager, etc.)
+        # Sanitize tool_calls so that args are JSON-serializable
         if getattr(ai_msg, "tool_calls", None):
             sanitized_tool_calls = []
             for tc in ai_msg.tool_calls:
