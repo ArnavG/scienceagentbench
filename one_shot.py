@@ -34,15 +34,20 @@ def main():
     - You MUST use the `Python_REPL` tool to actually run code.
     - Do NOT just print code as text; always execute via the tool.
     - When calling the tool, always provide a single argument "query" containing the Python code.
+    - If you want to display something (e.g., df.shape), you need to surround it with a print() statement.
+        - Otherwise, it won't show up in the REPL output.
+        - e.g., use print(df.shape) if you want to know the dimensions of a dataframe called df
 
     Your goals:
 
     1. Data:
     - The training and test data are stored in the following CSV files (relative to the current directory):
-        - "data/train_fda.csv"  (has column "FDA_APPROVED" as the target)
-        - "data/test_fda.csv"   (has column "FDA_APPROVED" as the target)
-        - "data/train_tox.csv"  (has column "CT_TOX" as the target)
-        - "data/test_tox.csv"   (has column "CT_TOX" as the target)
+        - "data/train_fda.csv" (has column "FDA_APPROVED" as the target)
+        - "data/test_fda.csv" (has column "FDA_APPROVED" as the target)
+        - "data/train_tox.csv" (has column "CT_TOX" as the target)
+        - "data/test_tox.csv" (has column "CT_TOX" as the target)
+        - Use only these 4 files. Use one model to predict FDA_APPROVED using data/train_fda.csv and data/test_fda.csv
+        - Likewise, use one model to predict CT_TOX using data/train_tox.csv and data/test_tox.csv
 
     2. For each task (FDA_APPROVED and CT_TOX), you MUST:
     a. Load the corresponding train and test data from the CSV files.
