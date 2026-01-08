@@ -8,7 +8,7 @@ This project implements and evaluates an **AI-agentic scientific assistant** for
 
 I approached the task in three stages. First, I completed the workflow manually using standard cheminformatics/ML tooling: loading the dataset, featurizing molecules with **ECFP (circular fingerprints)**, training a **DeepChem MultitaskClassifier**, and recording performance under strong class imbalance. Second, I tested a **one-shot ReAct-style agent** that uses tool-calling with a Python execution environment to automate the same pipeline end-to-end, and analyzed common failure modes (dependency friction, brittle featurization/model APIs, and evaluation reliability). Third, I built a **multi-agent system** that decomposes the workflow into specialized roles—**Featurizer → Modeler → Evaluator**—so each agent has a narrow, verifiable responsibility and passes explicit artifacts (cached features, prediction CSVs, metric CSVs) downstream. This decomposition improved robustness versus one-shot execution by reducing cascading errors and forcing evaluation to be computed from saved outputs rather than generated text.
 
-This repo contains my work for **ScienceAgentBench**. I focus on a single benchmark instance centered on the **ClinTox** dataset: training models to predict **(1) clinical toxicity** and **(2) FDA approval** from molecular structure (SMILES), then saving test predictions and evaluation metrics. :contentReference[oaicite:1]{index=1}
+This repo contains my work for **ScienceAgentBench**. I focus on a single benchmark instance centered on the **ClinTox** dataset: training models to predict **(1) clinical toxicity** and **(2) FDA approval** from molecular structure (SMILES), then saving test predictions and evaluation metrics.
 
 I implement and compare:
 1. **Manual completion** (DeepChem multitask model)
@@ -22,25 +22,25 @@ I implement and compare:
 
 Typical structure (key files / folders):
 
-- `a4_report.pdf` (or `a4_report.md`) — writeup of experiments and results. :contentReference[oaicite:2]{index=2}
-- `one_shot.py` (and/or `one_shot_prompts/`, `one_shot_logs/`) — one-shot agent implementation & traces. :contentReference[oaicite:3]{index=3}
-- `multi_agent.py` — multi-agent pipeline (featurizer agent, modeling agent, evaluator agent). :contentReference[oaicite:4]{index=4}
+- `a4_report.pdf` (or `a4_report.md`) — writeup of experiments and results.
+- `one_shot.py` (and/or `one_shot_prompts/`, `one_shot_logs/`) — one-shot agent implementation & traces.
+- `multi_agent.py` — multi-agent pipeline (featurizer agent, modeling agent, evaluator agent).
 - `data/`
   - `clintox.csv` — ClinTox dataset (SMILES + labels)
-  - *(optional)* `clintox_fp.csv` — cached featurized fingerprints (saved by featurizer agent as a fail-safe). :contentReference[oaicite:5]{index=5}
-- `agent_predictions/` — outputs from the one-shot/ReAct agent run (predictions + metrics). :contentReference[oaicite:6]{index=6}
-- `multiagent_predictions/` — outputs from the multi-agent run (predictions + metrics). :contentReference[oaicite:7]{index=7}
-- `pred_results/` — outputs for the bonus DKPES run (predictions + metrics). :contentReference[oaicite:8]{index=8}
+  - *(optional)* `clintox_fp.csv` — cached featurized fingerprints (saved by featurizer agent as a fail-safe).
+- `agent_predictions/` — outputs from the one-shot/ReAct agent run (predictions + metrics).
+- `multiagent_predictions/` — outputs from the multi-agent run (predictions + metrics).
+- `pred_results/` — outputs for the bonus DKPES run (predictions + metrics).
 
 ---
 
 ## Task Chosen (ClinTox)
 
-> “Train a multitask model on the Clintox dataset to predict a drug's toxicity and FDA approval status. Save the test set predictions, including the SMILES representation of drugs and the probability of positive labels, to `pred_results/clintox_test_pred.csv`.” :contentReference[oaicite:9]{index=9}
+> “Train a multitask model on the Clintox dataset to predict a drug's toxicity and FDA approval status. Save the test set predictions, including the SMILES representation of drugs and the probability of positive labels, to `pred_results/clintox_test_pred.csv`.”
 
 ### Domain constraints (from the benchmark)
-- **Featurization:** Extended-Connectivity Fingerprints (ECFPs) via DeepChem’s `CircularFingerprint` featurizer. :contentReference[oaicite:10]{index=10}  
-- **Model:** DeepChem `MultitaskClassifier` with two binary heads (FDA approval + clinical toxicity). :contentReference[oaicite:11]{index=11}
+- **Featurization:** Extended-Connectivity Fingerprints (ECFPs) via DeepChem’s `CircularFingerprint` featurizer.
+- **Model:** DeepChem `MultitaskClassifier` with two binary heads (FDA approval + clinical toxicity).
 
 ---
 
@@ -69,7 +69,7 @@ My manual workflow:
 - Train DeepChem `MultitaskClassifier` with class-weighting to address imbalance
 - Evaluate & record metrics
 
-The report documents the approach and the exact architecture/hyperparameters used. :contentReference[oaicite:12]{index=12}
+The report documents the approach and the exact architecture/hyperparameters used.
 
 ### 2) One-shot Agent (ReAct + Python REPL Tool)
 Run:
